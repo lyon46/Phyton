@@ -1,21 +1,67 @@
-print("Bem-vindo ao jogo da adivinhação")
+import random
+import time
 
-numero_magico = 42
+def exibir_personagem():
+    print('''
+         O
+        \|/
+         |
+        / \\
+    ''')
 
-total_de_tentativas = 3
-rodada = 1
+def jogar_adivinhacao():
+    palavras = ['biomob', 'petropolis', 'serratec', 'filipe', 'internet', 'cerveja']
+    palavra_secreta = random.choice(palavras).lower()
+    palavra_adivinhada = ['_'] * len(palavra_secreta)
+    tentativas = 6
+    letras_usadas = []
 
-while(rodada <= total_de_tentativas):
-    print("Tentativa {} de {}".format(rodada, total_de_tentativas))
+    print("Bem-vindo ao jogo de adivinhação de palavras!")
+    time.sleep(1)
+    print("Estou pensando em uma palavra...")
+    time.sleep(1)
+    print("Tente adivinhar qual é preenchendo as letras uma por uma.")
+    time.sleep(1)
+    print("Vamos começar!")
 
-    chute = int(input("Tente adivinhar o numero magico, faça um chute\n"))
+    while True:
+        exibir_personagem()
+        print(' '.join(palavra_adivinhada))
+        print("Tentativas restantes:", tentativas)
+        print("Letras usadas:", ', '.join(letras_usadas))
 
-    if(chute == numero_magico):
-        print("Acertou")
-        break
-    elif(chute > numero_magico):
-        print("Errou, chutou alto")
-    else:
-        print("Errou, chutou baixo")
+        letra = input("Digite uma letra: ").lower()
 
-    rodada = rodada + 1
+        if len(letra) != 1 or not letra.isalpha():
+            print("Por favor, digite apenas uma letra válida.")
+            continue
+
+        if letra in letras_usadas:
+            print("Você já tentou essa letra. Tente outra.")
+            continue
+
+        letras_usadas.append(letra)
+
+        if letra in palavra_secreta:
+            for i, l in enumerate(palavra_secreta):
+                if l == letra:
+                    palavra_adivinhada[i] = letra
+
+            if '_' not in palavra_adivinhada:
+                print(' '.join(palavra_adivinhada))
+                print("Parabéns! Você acertou a palavra!")
+                break
+        else:
+            tentativas -= 1
+            print("Letra incorreta!")
+
+            if tentativas == 0:
+                exibir_personagem()
+                print("Você perdeu! A palavra secreta era:", palavra_secreta)
+                break
+
+        print()
+
+    print("Obrigado por jogar!")
+
+jogar_adivinhacao()
