@@ -3,17 +3,14 @@ import time
 
 def exibir_personagem():
     print('''
-         O
-        \|/
-         |
-        / \\
+         Bora Adivinhar !Vamooo
     ''')
 
 def jogar_adivinhacao():
     palavras = ['biomob', 'petropolis', 'serratec', 'filipe', 'internet', 'cerveja']
     palavra_secreta = random.choice(palavras).lower()
     palavra_adivinhada = ['_'] * len(palavra_secreta)
-    tentativas = 6
+    tentativas = 10
     letras_usadas = []
 
     print("Bem-vindo ao jogo de adivinhação de palavras!")
@@ -37,7 +34,7 @@ def jogar_adivinhacao():
             continue
 
         if letra in letras_usadas:
-            print("Você já tentou essa letra. Tente outra.")
+            print("Você Digitou essa letra. Tente outra.")
             continue
 
         letras_usadas.append(letra)
@@ -49,7 +46,7 @@ def jogar_adivinhacao():
 
             if '_' not in palavra_adivinhada:
                 print(' '.join(palavra_adivinhada))
-                print("Parabéns! Você acertou a palavra!")
+                print("Otimo! Você acertou a palavra!")
                 break
         else:
             tentativas -= 1
@@ -57,11 +54,11 @@ def jogar_adivinhacao():
 
             if tentativas == 0:
                 exibir_personagem()
-                print("Você perdeu! A palavra secreta era:", palavra_secreta)
+                print("ERROU! A palavra secreta era:", palavra_secreta)
                 break
 
         print()
 
-    print("Obrigado por jogar!")
+    print("VALEU SUA PARTICIPAÇÃO FOI OTIMA!")
 
 jogar_adivinhacao()
